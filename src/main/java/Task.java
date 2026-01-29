@@ -1,6 +1,6 @@
-public class Task {
-    private final String dscp;
-    private boolean isDone;
+public abstract class Task {
+    protected final String dscp;
+    protected boolean isDone;
 
     public Task(String dscp) {
         this.dscp = dscp;
@@ -23,8 +23,10 @@ public class Task {
         this.isDone = false;
     }
 
-    @Override
-    public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] " + dscp;
+    protected String getStatus() {
+        return isDone ? "X" : " ";
     }
+
+    @Override
+    public abstract String toString();
 }

@@ -52,12 +52,25 @@ public class Saru {
                 System.out.println(t);
                 continue;
             }
-            tasks[cnt] = new Task(input);
-            cnt++;
+            if (input.startsWith("todo ")) {
+                tasks[cnt++] = new Todo(input.substring(5));
+            } else if (input.startsWith("deadline ")) {
+                String[] parts = input.substring(9).split(" /by ");
+                tasks[cnt++] = new Deadline(parts[0], parts[1]);
+            } else if (input.startsWith("event ")) {
+                String[] parts = input.substring(6).split(" /from | /to ");
+                tasks[cnt++] = new Event(parts[0], parts[1], parts[2]);
+            } else {
+                System.out.println("I don't understand that command.");
+                continue;
+            }
 
-            System.out.println("added: " + input);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(tasks[cnt - 1]);
+            System.out.println("Now you have " + cnt + " tasks in the list.");
         }
     }
+
     private static int parseIndex(String s) {
         try {
             return Integer.parseInt(s.trim());
