@@ -1,12 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Saru {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int cnt = 0;
+        List<Task> tasks = new ArrayList<>();
 
-        ;
         System.out.println("Hello! I'm Saru");
         System.out.println("What can I do for you?");
 
@@ -20,19 +20,19 @@ public class Saru {
 
                 if (input.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < cnt; i++) {
-                        System.out.println((i + 1) + ". " + tasks[i]);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + ". " + tasks.get(i));
                     }
                     continue;
                 }
 
                 if (input.startsWith("mark ")) {
                     int index = parseIndexOrThrow(input.substring(5));
-                    if (index < 1 || index > cnt) {
+                    if (index < 1 || index > tasks.size()) {
                         throw new SaruException("Invalid task number.");
                     }
 
-                    Task t = tasks[index - 1];
+                    Task t = tasks.get(index - 1);
                     t.markDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(t);
@@ -41,35 +41,37 @@ public class Saru {
 
                 if (input.startsWith("unmark ")) {
                     int index = parseIndexOrThrow(input.substring(7));
-                    if (index < 1 || index > cnt) {
+                    if (index < 1 || index > tasks.size()) {
                         throw new SaruException("Invalid task number.");
                     }
 
-                    Task t = tasks[index - 1];
+                    Task t = tasks.get(index - 1);
                     t.unmarkDone();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(t);
                     continue;
                 }
-            /*
-            if (input.startsWith("todo ")) {
-                tasks[cnt++] = new Todo(input.substring(5));
-            } else if (input.startsWith("deadline ")) {
-                String[] parts = input.substring(9).split(" /by ");
-                tasks[cnt++] = new Deadline(parts[0], parts[1]);
-            } else if (input.startsWith("event ")) {
-                String[] parts = input.substring(6).split(" /from | /to ");
-                tasks[cnt++] = new Event(parts[0], parts[1], parts[2]);
-            } else {
-                System.out.println("I don't understand that command.");
-                continue;
-            }*/
+
+                if (input.startsWith("delete ")) {
+                    int index = parseIndexOrThrow(input.substring(7));
+                    if (index < 1 || index > tasks.size()) {
+                        System.out.println("Invalid task number.");
+                        continue;
+                    }
+
+                    Task removed = tasks.remove(index - 1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + removed);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    continue;
+                }
+
                 Task newTask = parseCreateCommand(input);
-                tasks[cnt++] = newTask;
+                tasks.add(newTask);
 
                 System.out.println("Got it. I've added this task:");
                 System.out.println(newTask);
-                System.out.println("Now you have " + cnt + " tasks in the list.");
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } catch (SaruException e) {
                 System.out.println(e.getMessage());
             }
