@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Saru {
     public static void main(String[] args) {
@@ -100,16 +102,24 @@ public class Saru {
                 throw new SaruException("Deadline needs a description. Example: deadline return book /by Sunday");
             }
             if (!rest.contains(" /by ")) {
-                throw new SaruException("Deadline format: deadline <task> /by <time>");
+                throw new SaruException("Deadline format: deadline <task> /by <yyyy-mm-dd>");
             }
 
             String[] parts = rest.split(" /by ", 2);
             String dscp = parts[0].trim();
-            String by = parts[1].trim();
+            String byStr = parts[1].trim();
 
-            if (dscp.isEmpty() || by.isEmpty()) {
+            if (dscp.isEmpty() || byStr.isEmpty()) {
                 throw new SaruException("Deadline format: deadline <task> /by <time>");
             }
+
+            LocalDate by;
+            try {
+                by = LocalDate.parse(byStr); // yyyy-mm-dd
+            } catch (DateTimeParseException e) {
+                throw new SaruException("Invalid date. Use yyyy-mm-dd, e.g. 2019-10-15");
+            }
+
             return new Deadline(dscp, by);
         }
 

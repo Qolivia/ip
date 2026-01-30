@@ -1,7 +1,9 @@
-public class Deadline extends Task{
-    private final String by;
+import java.time.LocalDate;
 
-    public Deadline(String dscp, String by) {
+public class Deadline extends Task{
+    private LocalDate by;
+
+    public Deadline(String dscp, LocalDate by) {
         super(dscp);
         this.by = by;
     }

@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class Storage {
                 task = new Todo(parts[2]);
                 break;
             case 'D':
-                task = new Deadline(parts[2], parts[3]);
+                task = new Deadline(parts[2], LocalDate.parse(parts[3]));
                 break;
             case 'E':
                 task = new Event(parts[2], parts[3], parts[4]);
