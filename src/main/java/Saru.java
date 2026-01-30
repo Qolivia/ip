@@ -5,7 +5,8 @@ import java.util.List;
 public class Saru {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage();
+        List<Task> tasks = storage.load();
 
         System.out.println("Hello! I'm Saru");
         System.out.println("What can I do for you?");

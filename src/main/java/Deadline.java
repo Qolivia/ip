@@ -10,4 +10,10 @@ public class Deadline extends Task{
     public String toString() {
         return "[D] [" + getStatus() + "] " + dscp + " (by: " + by + ")";
     }
+
+    @Override
+    public String toFileString() {
+        return "D | " + (isDone ? "1" : "0") + " | " + dscp + " | " + by;
+    }
+
 }
