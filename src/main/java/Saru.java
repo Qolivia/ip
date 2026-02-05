@@ -164,7 +164,6 @@ public class Saru {
 
         throw new SaruException("I don't understand that command.");
     }
-
     private static int parseIndexOrThrow(String s) throws SaruException {
         try {
             return Integer.parseInt(s.trim());
