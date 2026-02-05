@@ -5,24 +5,30 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Saru {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage();
-        List<Task> tasks = storage.load();
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
 
-        System.out.println("Hello! I'm Saru");
-        System.out.println("What can I do for you?");
+    public Saru() {
+        this.ui = new Ui();
+        this.storage = new Storage();
+        this.tasks = new TaskList(storage.load());
+    }
+
+    public void run() {
+        ui.showWelcome();
 
         while (true) {
-            String input = sc.nextLine().trim();
+            String input = ui.readCommand();
+
             try {
                 if (input.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
+                    ui.showMessage("Bye. Hope to see you again soon!");
                     break;
                 }
 
                 if (input.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
+                    ui.showMessage("Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println((i + 1) + ". " + tasks.get(i));
                     }
@@ -37,9 +43,10 @@ public class Saru {
 
                     Task t = tasks.get(index - 1);
                     t.markDone();
-                    storage.save(tasks);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(t);
+                    storage.save(tasks.asList());
+
+                    ui.showMessage("Nice! I've marked this task as done:");
+                    ui.showMessage(t.toString());
                     continue;
                 }
 
@@ -51,9 +58,10 @@ public class Saru {
 
                     Task t = tasks.get(index - 1);
                     t.unmarkDone();
-                    storage.save(tasks);
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println(t);
+                    storage.save(tasks.asList());
+
+                    ui.showMessage("OK, I've marked this task as not done yet:");
+                    ui.showMessage(t.toString());
                     continue;
                 }
 
@@ -65,26 +73,30 @@ public class Saru {
                     }
 
                     Task removed = tasks.remove(index - 1);
-                    storage.save(tasks);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println("  " + removed);
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    storage.save(tasks.asList());
+
+                    ui.showMessage("Noted. I've removed this task:");
+                    ui.showMessage("  " + removed);
+                    ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
                     continue;
                 }
 
                 Task newTask = parseCreateCommand(input);
                 tasks.add(newTask);
-                storage.save(tasks);
+                storage.save(tasks.asList());
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newTask);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                ui.showMessage("Got it. I've added this task:");
+                ui.showMessage(newTask.toString());
+                ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
+
             } catch (SaruException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e.getMessage());
             }
         }
     }
-
+    public static void main(String[] args) {
+        new Saru().run();
+    }
     /**
      * Parses create commands and returns the Task to be added.
      * Throws SaruException if the command is invalid.
