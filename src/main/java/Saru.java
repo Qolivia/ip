@@ -37,6 +37,7 @@ public class Saru {
 
                     Task t = tasks.get(index - 1);
                     t.markDone();
+                    storage.save(tasks);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(t);
                     continue;
@@ -50,6 +51,7 @@ public class Saru {
 
                     Task t = tasks.get(index - 1);
                     t.unmarkDone();
+                    storage.save(tasks);
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(t);
                     continue;
@@ -63,6 +65,7 @@ public class Saru {
                     }
 
                     Task removed = tasks.remove(index - 1);
+                    storage.save(tasks);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("  " + removed);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -71,6 +74,7 @@ public class Saru {
 
                 Task newTask = parseCreateCommand(input);
                 tasks.add(newTask);
+                storage.save(tasks);
 
                 System.out.println("Got it. I've added this task:");
                 System.out.println(newTask);

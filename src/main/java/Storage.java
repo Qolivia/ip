@@ -67,7 +67,9 @@ public class Storage {
                 throw new IllegalArgumentException("Corrupted file");
         }
 
-        if (done) task.markDone();
+        if (done) {
+            task.markDone();
+        }
         return task;
     }
 }
