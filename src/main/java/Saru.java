@@ -1,8 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class Saru {
     private final Ui ui;
@@ -36,7 +34,7 @@ public class Saru {
                 }
 
                 if (input.startsWith("mark ")) {
-                    int index = parseIndexOrThrow(input.substring(5));
+                    int index = Parser.parseIndexOrThrow(input.substring(5));
                     if (index < 1 || index > tasks.size()) {
                         throw new SaruException("Invalid task number.");
                     }
@@ -51,7 +49,7 @@ public class Saru {
                 }
 
                 if (input.startsWith("unmark ")) {
-                    int index = parseIndexOrThrow(input.substring(7));
+                    int index = Parser.parseIndexOrThrow(input.substring(7));
                     if (index < 1 || index > tasks.size()) {
                         throw new SaruException("Invalid task number.");
                     }
@@ -66,7 +64,7 @@ public class Saru {
                 }
 
                 if (input.startsWith("delete ")) {
-                    int index = parseIndexOrThrow(input.substring(7));
+                    int index = Parser.parseIndexOrThrow(input.substring(7));
                     if (index < 1 || index > tasks.size()) {
                         System.out.println("Invalid task number.");
                         continue;
@@ -81,7 +79,7 @@ public class Saru {
                     continue;
                 }
 
-                Task newTask = parseCreateCommand(input);
+                Task newTask = Parser.parseCreateCommand(input);
                 tasks.add(newTask);
                 storage.save(tasks.asList());
 
@@ -96,79 +94,5 @@ public class Saru {
     }
     public static void main(String[] args) {
         new Saru().run();
-    }
-    /**
-     * Parses create commands and returns the Task to be added.
-     * Throws SaruException if the command is invalid.
-     */
-    private static Task parseCreateCommand(String input) throws SaruException {
-
-        if (input.equals("todo") || input.startsWith("todo ")) {
-            String dscp = input.length() > 4 ? input.substring(4).trim() : "";
-            if (dscp.isEmpty()) {
-                throw new SaruException("Todo needs a description. Example: todo borrow book");
-            }
-            return new Todo(dscp);
-        }
-
-
-        if (input.equals("deadline") || input.startsWith("deadline ")) {
-            String rest = input.length() > 8 ? input.substring(8).trim() : "";
-            if (rest.isEmpty()) {
-                throw new SaruException("Deadline needs a description. Example: deadline return book /by Sunday");
-            }
-            if (!rest.contains(" /by ")) {
-                throw new SaruException("Deadline format: deadline <task> /by <yyyy-mm-dd>");
-            }
-
-            String[] parts = rest.split(" /by ", 2);
-            String dscp = parts[0].trim();
-            String byStr = parts[1].trim();
-
-            if (dscp.isEmpty() || byStr.isEmpty()) {
-                throw new SaruException("Deadline format: deadline <task> /by <time>");
-            }
-
-            LocalDate by;
-            try {
-                by = LocalDate.parse(byStr); // yyyy-mm-dd
-            } catch (DateTimeParseException e) {
-                throw new SaruException("Invalid date. Use yyyy-mm-dd, e.g. 2019-10-15");
-            }
-
-            return new Deadline(dscp, by);
-        }
-
-        if (input.equals("event") || input.startsWith("event ")) {
-            String rest = input.length() > 5 ? input.substring(5).trim() : "";
-            if (rest.isEmpty()) {
-                throw new SaruException("Event needs a description. Example: event project meeting /from 2pm /to 4pm");
-            }
-            if (!rest.contains(" /from ") || !rest.contains(" /to ")) {
-                throw new SaruException("Event format: event <task> /from <start> /to <end>");
-            }
-
-            String[] first = rest.split(" /from ", 2);
-            String dscp = first[0].trim();
-            String afterFrom = first[1].trim();
-
-            String[] second = afterFrom.split(" /to ", 2);
-            String from = second[0].trim();
-            String to = second[1].trim();
-
-            if (dscp.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                throw new SaruException("Event format: event <task> /from <start> /to <end>");
-            }
-            return new Event(dscp, from, to);
-        }
-
-        throw new SaruException("I don't understand that command.");
-    }
-    private static int parseIndexOrThrow(String s) throws SaruException {
-        try {
-            return Integer.parseInt(s.trim());
-        } catch (NumberFormatException e) {
-            throw new SaruException("Please provide a valid task number.");
-        }
     }
 }
