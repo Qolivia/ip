@@ -1,4 +1,6 @@
-public class Event extends Task{
+package saru;
+
+public class Event extends Task {
     private final String from;
     private final String to;
 

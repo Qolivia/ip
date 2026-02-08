@@ -1,6 +1,4 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+package saru;
 
 public class Saru {
     private final Ui ui;

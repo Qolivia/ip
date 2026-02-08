@@ -1,3 +1,5 @@
+package saru;
+
 /**
  * Exception class for Saru.
  */

@@ -1,6 +1,8 @@
+package saru;
+
 import java.time.LocalDate;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate by;
 
     public Deadline(String dscp, LocalDate by) {

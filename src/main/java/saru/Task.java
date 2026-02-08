@@ -1,3 +1,5 @@
+package saru;
+
 public abstract class Task {
     protected final String dscp;
     protected boolean isDone;
