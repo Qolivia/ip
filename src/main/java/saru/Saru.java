@@ -1,16 +1,28 @@
 package saru;
 
+/**
+ * Main entry point of the Saru task manager application.
+ * Coordinates user interaction (Ui), persistence (Storage), and task operations (TaskList).
+ */
 public class Saru {
     private final Ui ui;
     private final Storage storage;
     private final TaskList tasks;
 
+    /**
+     * Constructs a Saru application with default UI and storage.
+     * Loads any previously saved tasks from storage.
+     */
     public Saru() {
         this.ui = new Ui();
         this.storage = new Storage();
         this.tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Runs the main command loop until the user exits with "bye".
+     * Commands are read from Ui and executed by delegating to other classes.
+     */
     public void run() {
         ui.showWelcome();
 
@@ -90,6 +102,10 @@ public class Saru {
             }
         }
     }
+
+    /**
+     * Launches the application.
+     */
     public static void main(String[] args) {
         new Saru().run();
     }

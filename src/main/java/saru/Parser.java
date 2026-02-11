@@ -3,11 +3,18 @@ package saru;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses a create command and returns the Task to be added.
+ * Throws SaruException if the command is invalid.
+ */
 public class Parser {
 
     /**
-     * Parses a create command and returns the Task to be added.
-     * Throws SaruException if the command is invalid.
+     * Parses a create command (todo, deadline, event) and returns the Task to be added.
+     *
+     * @param input Full user input string.
+     * @return A Task instance created from the command.
+     * @throws SaruException If the command format is invalid.
      */
     public static Task parseCreateCommand(String input) throws SaruException {
         if (input.equals("todo") || input.startsWith("todo ")) {
@@ -68,6 +75,13 @@ public class Parser {
         throw new SaruException("I don't understand that command.");
     }
 
+    /**
+     * Parses an integer index from a string.
+     *
+     * @param s String that should contain an integer.
+     * @return Parsed integer value.
+     * @throws SaruException If the string is not a valid integer.
+     */
     public static int parseIndexOrThrow(String s) throws SaruException {
         try {
             return Integer.parseInt(s.trim());
