@@ -90,6 +90,7 @@ public class Saru {
             }
         }
     }
+
     public static void main(String[] args) {
         new Saru().run();
     }
