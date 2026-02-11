@@ -77,6 +77,33 @@ public class Saru {
                     continue;
                 }
 
+                if (input.startsWith("find ")) {
+                    String keyword = input.substring(5).trim();
+
+                    if (keyword.isEmpty()) {
+                        throw new SaruException("Please provide a keyword to search.");
+                    }
+
+                    ui.showMessage("Here are the matching tasks in your list:");
+
+                    int count = 0;
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task t = tasks.get(i);
+
+                        if (t.getDscp().contains(keyword)) {
+                            count++;
+                            System.out.println(count + ". " + t);
+                        }
+                    }
+
+                    if (count == 0) {
+                        ui.showMessage("No matching tasks found.");
+                    }
+
+                    continue;
+                }
+
+
                 Task newTask = Parser.parseCreateCommand(input);
                 tasks.add(newTask);
                 storage.save(tasks.asList());
