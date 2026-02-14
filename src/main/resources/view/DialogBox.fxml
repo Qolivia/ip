@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root type="HBox"
+         xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         spacing="10" alignment="TOP_LEFT">
+    <children>
+        <Label fx:id="dialog" wrapText="true"
+               style="-fx-background-color: #eeeeee; -fx-padding: 10; -fx-background-radius: 10;"
+               maxWidth="420"/>
+    </children>
+</fx:root>
