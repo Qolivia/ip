@@ -9,6 +9,14 @@ public class Saru {
     private final Storage storage;
     private final TaskList tasks;
 
+    public String getWelcomeMessage() {
+        return "Hello! I'm Saru\nWhat can I do for you?";
+    }
+
+    public String getResponse(String input) {
+        return "You said: " + input;
+    }
+
     /**
      * Constructs a Saru application with default UI and storage.
      * Loads any previously saved tasks from storage.
