@@ -130,9 +130,7 @@ public class Saru {
         }
     }
 
-    /**
-     * Launches the application.
-     */
+
     public static void main(String[] args) {
         new Saru().run();
     }
