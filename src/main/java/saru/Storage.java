@@ -39,6 +39,7 @@ public class Storage {
     }
 
     public void save(List<Task> tasks) {
+        assert tasks != null : "tasks list should not be null";
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH));
             for (Task t : tasks) {
@@ -52,7 +53,11 @@ public class Storage {
     }
 
     private Task parseTask(String line) {
+        assert line != null : "line should not be null";
         String[] parts = line.split(" \\| ");
+        assert parts.length >= 3 : "Expected at least 3 fields";
+        assert parts[0] != null && parts[0].length() == 1 : "Invalid task type field";
+        assert parts[1].equals("0") || parts[1].equals("1") : "Invalid done flag";
         char type = parts[0].charAt(0);
         boolean done = parts[1].equals("1");
 

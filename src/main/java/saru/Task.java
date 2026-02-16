@@ -5,6 +5,7 @@ public abstract class Task {
     protected boolean isDone;
 
     public Task(String dscp) {
+        assert dscp != null : "Task description must not be null";
         this.dscp = dscp;
         this.isDone = false;
     }

@@ -35,6 +35,7 @@ public class Parser {
             }
 
             String[] parts = rest.split(" /by ", 2);
+            assert parts.length == 2 : "Command must have a description";
             String dscp = parts[0].trim();
             String byStr = parts[1].trim();
 
