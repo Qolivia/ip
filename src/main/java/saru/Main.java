@@ -1,22 +1,31 @@
 package saru;
 
+import java.io.IOException;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Basic JavaFX GUI stub.
+ * A GUI for Saru using FXML.
  */
 public class Main extends Application {
 
+    private Saru saru = new Saru();
+
     @Override
     public void start(Stage stage) {
-        Label hello = new Label("Hello World!");
-        Scene scene = new Scene(hello, 300, 100);
-
-        stage.setTitle("Saru");
-        stage.setScene(scene);
-        stage.show();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setSaru(saru);  // inject the Saru instance
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
