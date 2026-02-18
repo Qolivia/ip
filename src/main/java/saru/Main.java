@@ -22,7 +22,12 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setSaru(saru);  // inject the Saru instance
+            stage.setMinHeight(220);
+            stage.setMinWidth(417);
+            MainWindow controller = fxmlLoader.getController();
+            controller.setSaru(saru);
+            controller.showWelcome();
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
