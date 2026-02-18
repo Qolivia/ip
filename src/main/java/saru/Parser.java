@@ -2,12 +2,44 @@ package saru;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Map;
 
 /**
  * Parses a create command and returns the Task to be added.
  * Throws SaruException if the command is invalid.
  */
 public class Parser {
+
+    // Aliases for command words (first token only).
+    // Key: alias user types, Value: the official command word.
+    private static final Map<String, String> COMMAND_ALIASES = Map.of(
+            "t", "todo",
+            "d", "deadline",
+            "e", "event",
+            "ls", "list",
+            "rm", "delete",
+            "q", "bye"
+    );
+
+    private static String normalizeCommandWord(String userInput) {
+        String trimmed = userInput.trim();
+
+        if (trimmed.isEmpty()) {
+            return trimmed;
+        }
+
+        String[] parts = trimmed.split("\\s+", 2);
+        String commandWord = parts[0].toLowerCase(); // case-insensitive alias support
+        String rest = (parts.length == 2) ? parts[1] : "";
+
+        String normalized = COMMAND_ALIASES.getOrDefault(commandWord, commandWord);
+
+        return rest.isEmpty() ? normalized : normalized + " " + rest;
+    }
+
+    public static String normalizeInput(String userInput) {
+        return normalizeCommandWord(userInput);
+    }
 
     /**
      * Parses a create command (todo, deadline, event) and returns the Task to be added.

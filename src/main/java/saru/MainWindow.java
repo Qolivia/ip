@@ -22,17 +22,24 @@ public class MainWindow extends AnchorPane {
 
     private Saru saru;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/hachi.png"));
-    private Image saruImage = new Image(this.getClass().getResourceAsStream("/images/chikaa.jpeg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/unuko.png"));
+    private Image saruImage = new Image(this.getClass().getResourceAsStream("/images/monkey.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+
     /** Injects the Saru instance */
     public void setSaru(Saru s) {
         saru = s;
+    }
+
+    public void showWelcome() {
+        dialogContainer.getChildren().add(
+                DialogBox.getSaruDialog(saru.getWelcomeMessage(), saruImage)
+        );
     }
 
     /**
