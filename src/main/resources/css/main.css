@@ -1,0 +1,51 @@
+.root {
+    main-color: rgb(237, 255, 242);       /* Create a looked-up color called "main-color" within root. */
+    -fx-background-color: main-color;
+    -fx-background-image: url("../images/banana.png"); /* Set image */
+    -fx-font: 16px "Chalkboard";
+}
+
+.text-field {
+    -fx-background-color: #FFEA99;
+    -fx-font: 16px "Chalkboard";
+}
+
+.button {
+    -fx-background-color: #FFCC00;
+    -fx-font: italic bold 16px "Chalkboard";
+}
+
+.button:hover {
+    -fx-background-color: #FFC300;
+    -fx-font-size: 18px;
+}
+
+.button:pressed {
+    -fx-background-color: orange;
+    -fx-font-size: 20px;
+}
+
+.scroll-pane {
+    -fx-background-color: rgba(255,255,255,.5);
+}
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-font-size: 10px;  /* Change width of scroll bar. */
+    -fx-background-color: #FFEA99;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #703C05;
+    -fx-background-radius: 1em;
+}
+
+/* Hides the increment and decrement buttons. */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+
