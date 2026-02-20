@@ -203,6 +203,11 @@ public class Saru {
                 int index = Parser.parseIndexOrThrow(input.substring(5));
                 validateTaskNumber(index);
                 Task t = tasks.get(index - 1);
+
+                if (t.isDone()) {
+                    return "This task is already marked as done:\n" + t;
+                }
+
                 t.markDone();
                 storage.save(tasks.asList());
                 return "Nice! I've marked this task as done:\n" + t;
@@ -212,6 +217,11 @@ public class Saru {
                 int index = Parser.parseIndexOrThrow(input.substring(7));
                 validateTaskNumber(index);
                 Task t = tasks.get(index - 1);
+
+                if (!t.isDone()) {
+                    return "This task is already marked as not done:\n" + t;
+                }
+
                 t.unmarkDone();
                 storage.save(tasks.asList());
                 return "OK, I've marked this task as not done yet:\n" + t;

@@ -26,6 +26,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public boolean isDone() { return isDone; }
+
     protected String getStatus() {
         return isDone ? "X" : " ";
     }
