@@ -8,9 +8,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles loading tasks from and saving tasks to a local data file.
+ * The file is created automatically if it does not exist.
+ */
 public class Storage {
     private static final String FILE_PATH = "data/saru.txt";
 
+    /**
+     * Loads tasks from the storage file.
+     * If the file does not exist, an empty list is returned and the file is created.
+     *
+     * @return List of tasks loaded from disk.
+     */
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
 
@@ -38,6 +48,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the given list of tasks to the storage file.
+     *
+     * @param tasks List of tasks to save.
+     */
     public void save(List<Task> tasks) {
         assert tasks != null : "tasks list should not be null";
         try {

@@ -40,6 +40,11 @@ public class MainWindow extends AnchorPane {
         saru = s;
     }
 
+    /**
+     * Returns the welcome message displayed when the application starts.
+     *
+     * @return Welcome message string.
+     */
     public void showWelcome() {
         dialogContainer.getChildren().add(
                 DialogBox.getSaruDialog(saru.getWelcomeMessage(), saruImage)

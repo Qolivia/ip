@@ -15,6 +15,11 @@ public class Main extends Application {
 
     private Saru saru = new Saru();
 
+    /**
+     * Starts the JavaFX application by loading the main window and showing the welcome message.
+     *
+     * @param stage Primary stage created by JavaFX.
+     */
     @Override
     public void start(Stage stage) {
         try {

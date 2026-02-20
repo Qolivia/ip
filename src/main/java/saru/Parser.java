@@ -44,6 +44,13 @@ public class Parser {
         return rest.isEmpty() ? normalized : normalized + " " + rest;
     }
 
+    /**
+     * Normalizes the user input by converting supported command aliases
+     * into their official command words.
+     *
+     * @param userInput Raw user input string.
+     * @return Normalized command string.
+     */
     public static String normalizeInput(String userInput) {
         return normalizeCommandWord(userInput);
     }
