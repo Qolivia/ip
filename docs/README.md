@@ -38,7 +38,7 @@ d pay rent /by 2026-07-05
 ## ❌ Deleting Tasks
 Deletes a task by its index number.
 Command format: `delete <task number>`
-Alias: rm `d <task number>`
+Alias: `rm <task number>`
 Example:
 ```
 delete 2
@@ -61,6 +61,16 @@ Alias: t: `um <task number>`
 unmark 2
 um 5
 ```
+## ❌ Finding Tasks
+Searches your task list and displays tasks whose descriptions contain the given keyword.
+Command format: `find <keyword>`
+Alias: `f <keyword>`
+Example:
+```
+find banana
+f meeting
+```
+Saru will display all matching tasks. If no tasks match, Saru will inform you that no matches were found.
 
 ## Viewing Tasks
 Displays all tasks in the task list.
@@ -72,7 +82,7 @@ list
 ls
 ```
 
-## Exiting the Application
+## 🚪 Exiting the Application
 Exits the application safely.
 Command format: `bye`
 Alias: `q`
