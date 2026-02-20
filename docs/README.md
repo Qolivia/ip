@@ -1,30 +1,89 @@
-# Duke User Guide
+# 🐒 Saru User Guide 🐒
 
-// Update the title above to match the actual product name
+Saru is your personal scheduling monkey that helps you manage tasks quickly using simple commands.
 
-// Product screenshot goes here
 
-// Product intro goes here
+## 📌 Features
 
-## Adding deadlines
-
-// Describe the action and its outcome.
-
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
-
+## ➕ Adding Tasks
+Adds a new task to your task list.
+### 📝 To-dos
+Adds a task without a date.
+Command format: `todo <task name>`
+Alias: `t <task name>`
+Example: 
 ```
-expected output
+todo eat banana
+t do homework
+```
+### 🎈 Events
+Adds a task with a start and end time.
+Command format: `event <task name> /from <start time> /to <end time>`
+Alias: `e <task name> /from <start time> /to <end time>`
+Example:
+```
+event Lee's birthday party /from 11am /to 4pm
+e team meeting /from 2pm /to 3pm
+```
+### 📅 Deadlines
+Adds a task with a due date.
+Command format: `deadline <task name> /by <yyyy-mm-dd>`
+Alias: `d <task name> /by <yyyy-mm-dd>`
+Example:
+```
+deadline submit report /by 2026-02-03
+d pay rent /by 2026-07-05
 ```
 
-## Feature ABC
+## ❌ Deleting Tasks
+Deletes a task by its index number.
+Command format: `delete <task number>`
+Alias: rm `d <task number>`
+Example:
+```
+delete 2
+rm 1
+```
+## ✅ Marking Tasks 
+Marks tasks as done or undone using the task index.
+### Mark as Done
+Command format: `mark <task number>`
+Alias: `m <task number>`
+Example:
+```
+mark 1
+m 3
+```
+### Mark as Undone
+Command format: `unmark <task number>`
+Alias: t: `um <task number>`
+```
+unmark 2
+um 5
+```
 
-// Feature details
+## Viewing Tasks
+Displays all tasks in the task list.
+Command format: `list`
+Alias: `ls`
+Example:
+```
+list
+ls
+```
 
+## Exiting the Application
+Exits the application safely.
+Command format: `bye`
+Alias: `q`
+Example:
+```
+bye
+q
+```
+When this command is entered, Saru will display a goodbye message and close the application.
 
-## Feature XYZ
-
-// Feature details
+## ⚠ Notes
+* Task numbers refer to the index shown in the task list.
+* Dates for deadlines must follow the format `yyyy-mm-dd`.
+* If an invalid command is entered, Saru will prompt the user to enter a valid command.
