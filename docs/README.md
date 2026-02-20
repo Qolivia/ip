@@ -1,4 +1,5 @@
 # 🐒 Saru User Guide 🐒
+![UI Screenshot](Ui.png)
 
 Saru is your personal scheduling monkey that helps you manage tasks quickly using simple commands.
 
