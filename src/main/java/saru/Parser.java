@@ -18,7 +18,10 @@ public class Parser {
             "e", "event",
             "ls", "list",
             "rm", "delete",
-            "q", "bye"
+            "q", "bye",
+            "m", "mark",
+            "um", "unmark",
+            "f", "find"
     );
 
     private static String normalizeCommandWord(String userInput) {

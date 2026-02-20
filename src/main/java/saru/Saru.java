@@ -8,6 +8,12 @@ public class Saru {
     private final Ui ui;
     private final Storage storage;
     private final TaskList tasks;
+    private boolean shouldExit = false;
+
+    public boolean shouldExit() {
+        return shouldExit;
+    }
+
 
     public String getWelcomeMessage() {
         return "Hi! I'm Saru \uD83D\uDC12\n" +
@@ -180,6 +186,8 @@ public class Saru {
             }
 
             if (input.equals("bye")) {
+                shouldExit = true;
+                storage.save(tasks.asList());
                 return "Bye. Hope to see you again soon!";
             }
 
