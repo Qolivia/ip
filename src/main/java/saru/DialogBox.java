@@ -50,10 +50,24 @@ public class DialogBox extends HBox {
         dialog.getStyleClass().add("reply-label");
     }
 
+    /**
+     * Returns a DialogBox for the user's message (user image on the right).
+     *
+     * @param text Text content of the dialog box.
+     * @param img User display picture.
+     * @return A DialogBox representing the user's dialog.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox for Saru's message (Saru image on the left).
+     *
+     * @param text Text content of the dialog box.
+     * @param img Saru display picture.
+     * @return A DialogBox representing Saru's dialog.
+     */
     public static DialogBox getSaruDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

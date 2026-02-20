@@ -19,12 +19,17 @@ t do homework
 ```
 ### 🎈 Events
 Adds a task with a start and end time.
-Command format: `event <task name> /from <start time> /to <end time>`
-Alias: `e <task name> /from <start time> /to <end time>`
+**Command format:**
+- `event <task name> /from <yyyy-mm-dd> /to <yyyy-mm-dd>`
+- `event <task name> /from <yyyy-mm-dd HHmm> /to <yyyy-mm-dd HHmm>`
+
+**Alias:**
+- `e <task name> /from <yyyy-mm-dd> /to <yyyy-mm-dd>`
+- `e <task name> /from <yyyy-mm-dd HHmm> /to <yyyy-mm-dd HHmm>`
 Example:
 ```
-event Lee's birthday party /from 11am /to 4pm
-e team meeting /from 2pm /to 3pm
+event Lee's birthday party /from 2026-02-20 1100 /to 2026-02-20 1630
+e house camp /from 2026-02-03 /to 2026-02-05
 ```
 ### 📅 Deadlines
 Adds a task with a due date.
