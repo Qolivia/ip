@@ -11,15 +11,6 @@ public class Saru {
     private boolean shouldExit = false;
 
     /**
-     * Returns whether the application should terminate.
-     *
-     * @return true if Saru is instructed to exit, false otherwise
-     */
-    public boolean shouldExit() {
-        return shouldExit;
-    }
-
-    /**
      * Returns the welcome message displayed at application startup.
      *
      * @return the formatted welcome message string
@@ -177,10 +168,6 @@ public class Saru {
         }
     }
 
-    public static void main(String[] args) {
-        new Saru().run();
-    }
-
     /**
      * Generates a response for the user's chat message.
      */
@@ -278,4 +265,16 @@ public class Saru {
         }
     }
 
+    /**
+     * Returns whether the application should terminate.
+     *
+     * @return true if Saru is instructed to exit, false otherwise
+     */
+    public boolean shouldExit() {
+        return shouldExit;
+    }
+
+    public static void main(String[] args) {
+        new Saru().run();
+    }
 }
