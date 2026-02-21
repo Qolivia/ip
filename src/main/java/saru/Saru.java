@@ -10,11 +10,20 @@ public class Saru {
     private final TaskList tasks;
     private boolean shouldExit = false;
 
+    /**
+     * Returns whether the application should terminate.
+     *
+     * @return true if Saru is instructed to exit, false otherwise
+     */
     public boolean shouldExit() {
         return shouldExit;
     }
 
-
+    /**
+     * Returns the welcome message displayed at application startup.
+     *
+     * @return the formatted welcome message string
+     */
     public String getWelcomeMessage() {
         return "Hi! I'm Saru \uD83D\uDC12\n" +
                 "Your little scheduling monkey.\n" +
