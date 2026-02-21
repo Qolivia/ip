@@ -67,7 +67,7 @@ public class Parser {
         try {
             return LocalDate.parse(dateStr.trim(), STRICT_DATE);
         } catch (DateTimeParseException e) {
-            throw new SaruException("Invalid date. Use yyyy-mm-dd, e.g. 2026-02-28");
+            throw new SaruException("Invalid date. Use yyyy-mm-dd, e.g. 2026-02-03");
         }
     }
 
@@ -118,7 +118,7 @@ public class Parser {
             }
 
             String[] parts = rest.split(" /by ", 2);
-            assert parts.length == 2 : "Command must have a description";
+            assert parts.length == 2 : "Deadline must have a description";
             String dscp = parts[0].trim();
             String byStr = parts[1].trim();
 
@@ -133,10 +133,12 @@ public class Parser {
         if (input.equals("event") || input.startsWith("event ")) {
             String rest = input.length() > 5 ? input.substring(5).trim() : "";
             if (rest.isEmpty()) {
-                throw new SaruException("Event needs a description. Example: event house camp /from 2026-02-03 /to 2026-02-05");
+                throw new SaruException("Event needs a description. " +
+                        "Example: event house camp /from 2026-02-03 1200 /to 2026-02-05 1500");
             }
             if (!rest.contains(" /from ") || !rest.contains(" /to ")) {
-                throw new SaruException("Event format: event <task> /from <start> /to <end>");
+                throw new SaruException("Event format: event <task> /from <yyyy-mm-dd HHmm> /to <yyyy-mm-dd HHmm>\n" +
+                        "<HHmm> is optional!");
             }
 
             String[] first = rest.split(" /from ", 2);
@@ -148,7 +150,8 @@ public class Parser {
             String to = second[1].trim();
 
             if (dscp.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                throw new SaruException("Event format: event <task> /from <start> /to <end>");
+                throw new SaruException("Event format: event <task> /from <yyyy-mm-dd HHmm> /to <yyyy-mm-dd HHmm>\n" +
+                        "<HHmm> is optional!");
             }
 
             LocalDateTime fromDt = parseStartEndOrThrow(from);
